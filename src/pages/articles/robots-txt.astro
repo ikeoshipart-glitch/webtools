@@ -1,0 +1,8 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="robots.txtとは？初心者向けの書き方｜WebTools" description="robots.txtの役割、基本的な書き方、注意点と設置場所を初心者向けに解説します。">
+  <article><h1>robots.txtとは？</h1><p>robots.txtは、検索エンジンのクローラーに対して、サイト内のどこを巡回してよいか伝えるテキストファイルです。</p><h2>基本的な書き方</h2><pre><code>User-agent: *
+Allow: /
+Sitemap: https://example.com/sitemap-index.xml</code></pre><h2>設置場所</h2><p>サイトの一番上の階層に置き、<code>https://example.com/robots.txt</code>で表示できるようにします。</p><h2>注意点</h2><p>robots.txtは秘密のページを保護する機能ではありません。個人情報や管理画面の保護には、認証など別の対策が必要です。</p><p><a href="/tools/robots-txt-generator/">robots.txt生成ツールを使う →</a></p></article>
+</Layout>

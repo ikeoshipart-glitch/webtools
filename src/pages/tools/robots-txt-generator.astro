@@ -1,0 +1,31 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="robots.txt生成ツール｜WebTools" description="サイトURLとクロール設定からrobots.txtを無料で生成できます。">
+  <h1>robots.txt生成ツール</h1><p>検索エンジンのクローラーに、アクセスしてよい場所を伝えるファイルを作成します。</p>
+  <div class="tool">
+    <label for="site">サイトURL</label><input id="site" type="url" placeholder="https://example.com" />
+    <label for="rule">基本設定</label><select id="rule"><option value="allow">サイト全体を許可（推奨）</option><option value="block">サイト全体を拒否</option></select>
+    <label for="exclude">除外するパス（1行に1つ）</label><textarea id="exclude" placeholder="/admin/&#10;/private/"></textarea>
+    <button id="generate" type="button">robots.txtを生成</button>
+    <label for="result">生成結果</label><textarea id="result" readonly></textarea>
+    <div class="actions"><button id="copy" type="button">コピー</button><button id="download" type="button">ダウンロード</button></div>
+    <p id="message" aria-live="polite"></p>
+  </div>
+  <p class="note">入力内容はサーバーへ送信されず、このブラウザ内だけで処理されます。</p>
+  <p><a href="/articles/robots-txt/">robots.txtの意味と設置方法を読む →</a></p>
+  <script>
+    const el = (id) => document.getElementById(id);
+    const generate = () => {
+      const site = el('site').value.trim().replace(/\/$/, '');
+      const lines = ['User-agent: *', el('rule').value === 'block' ? 'Disallow: /' : 'Allow: /'];
+      if (el('rule').value === 'allow') el('exclude').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).forEach(x=>lines.push(`Disallow: ${x.startsWith('/')?x:`/${x}`}`));
+      if (site) lines.push('', `Sitemap: ${site}/sitemap-index.xml`);
+      el('result').value = lines.join('\n');
+    };
+    el('generate').addEventListener('click', generate);
+    el('copy').addEventListener('click', async()=>{ if(!el('result').value) generate(); await navigator.clipboard.writeText(el('result').value); el('message').textContent='コピーしました。'; });
+    el('download').addEventListener('click',()=>{ if(!el('result').value) generate(); const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([el('result').value],{type:'text/plain'}));a.download='robots.txt';a.click();URL.revokeObjectURL(a.href); });
+    generate();
+  </script>
+</Layout>
