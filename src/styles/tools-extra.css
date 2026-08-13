@@ -1,0 +1,6 @@
+input[type="checkbox"],input[type="range"]{width:auto}
+.check{display:flex;align-items:center;gap:.55rem;font-weight:500}
+fieldset{display:grid;gap:.45rem;margin:1.2rem 0;padding:1rem;border:1px solid var(--line);border-radius:6px}
+legend{padding:0 .4rem;font-weight:700}
+.mono-output,.code-input{font-family:Consolas,"SFMono-Regular",monospace}
+.mono-output{font-size:1.08rem;letter-spacing:.04em}
