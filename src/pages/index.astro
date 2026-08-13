@@ -1,10 +1,18 @@
 ---
 import Layout from '../layouts/Layout.astro';
+const tools = [
+  { href:'/tools/robots-txt-generator/', tag:'SEO', name:'robots.txt生成', text:'許可・拒否パスとサイトマップURLから設定ファイルを作成。' },
+  { href:'/tools/meta-tag-generator/', tag:'SEO', name:'metaタグ生成', text:'タイトルと説明文から基本的なheadタグを作成。' },
+  { href:'/tools/character-counter/', tag:'文章', name:'文字数カウント', text:'文字数、空白を除いた文字数、行数をその場で確認。' },
+  { href:'/tools/url-encoder/', tag:'開発', name:'URLエンコード', text:'日本語や記号をURLで扱える形式へ変換・復元。' },
+];
 ---
-<Layout title="WebTools｜無料のWeb制作・SEOツール" description="ブラウザですぐ使える、無料のWeb制作・SEOツール集です。">
-  <section class="hero"><p>登録不要・無料</p><h1>Web制作を、もっと簡単に。</h1><p>SEO設定や日々の制作作業に役立つツールを、ブラウザだけで安全に利用できます。</p></section>
-  <h2>公開中のツール</h2>
-  <div class="grid"><a class="card" href="/tools/robots-txt-generator/"><h3>robots.txt生成</h3><p>検索エンジン向けのrobots.txtを簡単に作成します。</p></a></div>
-  <h2>初心者向け記事</h2>
-  <div class="grid"><a class="card" href="/articles/robots-txt/"><h3>robots.txtとは？</h3><p>役割、書き方、設置場所をやさしく解説します。</p></a></div>
+<Layout title="WebTools｜Web制作で使う、無料の小さな道具箱" description="robots.txt、metaタグ、文字数、URLエンコードなど、Web制作の定型作業をブラウザ内で処理できる無料ツール集です。">
+  <section class="hero">
+    <div><p class="eyebrow">WEB制作の小さな道具箱</p><h1>調べる前に、ここで片づける。</h1></div>
+    <div class="hero-copy"><p>設定ファイルの作成や文字の変換など、何度も発生する作業を手早く終わらせるためのサイトです。</p><ul class="facts"><li>登録・ログイン不要</li><li>入力内容はブラウザ内で処理</li><li>個人・商用サイトで利用可能</li></ul></div>
+  </section>
+  <section id="tools"><div class="section-head"><h2>公開中のツール</h2><p>説明を読まなくても使え、必要なときは根拠や注意点まで確認できる設計を目指しています。</p></div><div class="grid">{tools.map(tool=><a class="card" href={tool.href}><span class="tag">{tool.tag}</span><h3>{tool.name}</h3><p>{tool.text}</p><small>開く →</small></a>)}</div></section>
+  <section><div class="section-head"><h2>まず読んでおきたい記事</h2><p>ツールを置くだけでなく、「なぜその設定になるのか」を実例とともに残します。</p></div><div class="grid"><a class="card" href="/articles/robots-txt/"><span class="tag">2026年8月更新</span><h3>robots.txtとは？</h3><p>できること、できないこと、書き方、公開前の確認方法をまとめました。</p><small>記事を読む →</small></a><a class="card" href="/updates/"><span class="tag">運営情報</span><h3>更新履歴</h3><p>追加した機能や修正内容を日付とともに公開しています。</p><small>履歴を見る →</small></a></div></section>
+  <div class="trust-strip"><div><strong>処理場所</strong><span>入力内容は原則ブラウザ内だけで処理</span></div><div><strong>料金</strong><span>すべて無料。会員登録なし</span></div><div><strong>運営方針</strong><span>実際に動作確認したものだけ公開</span></div></div>
 </Layout>
