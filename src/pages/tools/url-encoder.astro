@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="URLエンコード・デコード｜WebTools" description="日本語や記号をURLエンコードし、エンコード済み文字列を元に戻します。">
+  <div class="tool-intro"><p class="eyebrow">DEVELOPER TOOL</p><h1>URLエンコード・デコード</h1><p>日本語や空白、記号をURLで安全に扱える形式へ変換します。逆変換にも対応しています。</p></div><div class="tool"><label for="input">変換する文字列</label><textarea id="input" spellcheck="false" placeholder="例：検索 キーワード"></textarea><div class="actions"><button id="encode" type="button">エンコード</button><button id="decode" class="secondary" type="button">デコード</button></div><label for="result">変換結果</label><textarea id="result" readonly spellcheck="false"></textarea><button id="copy" type="button">結果をコピー</button><p id="message" class="status" aria-live="polite"></p></div>
+  <script>const i=document.getElementById('input'),r=document.getElementById('result'),m=document.getElementById('message');document.getElementById('encode').addEventListener('click',()=>{r.value=encodeURIComponent(i.value);m.textContent='エンコードしました。';});document.getElementById('decode').addEventListener('click',()=>{try{r.value=decodeURIComponent(i.value);m.textContent='デコードしました。';}catch{m.textContent='正しいエンコード文字列ではありません。';}});document.getElementById('copy').addEventListener('click',async()=>{await navigator.clipboard.writeText(r.value);m.textContent='コピーしました。';});</script>
+</Layout>

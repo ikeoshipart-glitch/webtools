@@ -1,0 +1,7 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="文字数カウント｜空白除外・行数も表示｜WebTools" description="入力した文章の文字数、空白を除いた文字数、行数をブラウザ内で即座に数えます。">
+  <div class="tool-intro"><p class="eyebrow">WRITING TOOL</p><h1>文字数カウント</h1><p>文章を貼り付けると、文字数と行数をその場で表示します。入力内容は保存・送信されません。</p></div><div class="tool"><label for="text">数えたい文章</label><textarea id="text" autofocus placeholder="ここに文章を入力してください"></textarea><div class="trust-strip" aria-live="polite"><div><strong id="all">0</strong><span>文字</span></div><div><strong id="no-space">0</strong><span>空白を除く</span></div><div><strong id="lines">0</strong><span>行</span></div></div><button id="clear" class="secondary" type="button">入力を消去</button></div>
+  <script>const t=document.getElementById('text'),update=()=>{const v=t.value;document.getElementById('all').textContent=String([...v].length);document.getElementById('no-space').textContent=String([...v.replace(/\s/g,'')].length);document.getElementById('lines').textContent=v?String(v.split(/\r?\n/).length):'0';};t.addEventListener('input',update);document.getElementById('clear').addEventListener('click',()=>{t.value='';update();t.focus();});</script>
+</Layout>
