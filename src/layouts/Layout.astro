@@ -39,7 +39,7 @@ const jsonLd = {
     <header class="site-header">
       <a class="logo" href="/" aria-label="WebTools トップページ"><span>WT</span> WebTools</a>
       <nav aria-label="メインナビゲーション">
-        <a href="/#tools">ツール一覧</a><a href="/articles/robots-txt/">読みもの</a><a href="/about/">このサイトについて</a>
+        <a href="/#tools">ツール一覧</a><a href="/articles/">読みもの</a><a href="/about/">このサイトについて</a>
       </nav>
     </header>
     <div class="site-shell">
@@ -47,14 +47,14 @@ const jsonLd = {
         <div class="sidebar-inner">
           <h2 class="sidebar-title">カテゴリから探す</h2>
           <nav class="category-nav">
-            <a class={pathname === '/' ? 'active' : undefined} href="/#tools"><span>すべてのツール</span><small>7</small></a>
-            <a class={pathname.startsWith('/seo') ? 'active' : undefined} href="/seo/"><span>SEO・サイト設定</span><small>2</small></a>
+            <a class={pathname === '/' ? 'active' : undefined} href="/#tools"><span>すべてのツール</span><small>8</small></a>
+            <a class={pathname.startsWith('/seo') ? 'active' : undefined} href="/seo/"><span>SEO・サイト設定</span><small>3</small></a>
             <a class={pathname.startsWith('/writing') ? 'active' : undefined} href="/writing/"><span>文章</span><small>1</small></a>
             <a class={pathname.startsWith('/developer') ? 'active' : undefined} href="/developer/"><span>開発・変換</span><small>3</small></a>
             <a class={pathname.startsWith('/security') ? 'active' : undefined} href="/security/"><span>セキュリティ</span><small>1</small></a>
-            <a class={pathname.startsWith('/articles/') ? 'active' : undefined} href="/articles/robots-txt/"><span>使い方・解説</span><small>1</small></a>
+            <a class={pathname.startsWith('/articles') ? 'active' : undefined} href="/articles/"><span>使い方・解説</span><small>2</small></a>
           </nav>
-          <p class="sidebar-note">ツールは動作確認後に追加します。現在7種類を公開中です。</p>
+          <p class="sidebar-note">ツールは動作確認後に追加します。現在8種類を公開中です。</p>
         </div>
       </aside>
       <main id="content"><slot /></main>
