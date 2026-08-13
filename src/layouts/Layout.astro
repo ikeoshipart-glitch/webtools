@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css';
 import '../styles/tools-extra.css';
+import '../styles/catalog.css';
 interface Props { title: string; description: string; }
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
@@ -33,13 +34,30 @@ const jsonLd = {
   </head>
   <body>
     <a class="skip-link" href="#content">本文へ移動</a>
+    <div class="utility-bar">登録不要・すべて無料・入力内容は原則ブラウザ内で処理</div>
     <header class="site-header">
       <a class="logo" href="/" aria-label="WebTools トップページ"><span>WT</span> WebTools</a>
       <nav aria-label="メインナビゲーション">
         <a href="/#tools">ツール一覧</a><a href="/articles/robots-txt/">読みもの</a><a href="/about/">このサイトについて</a>
       </nav>
     </header>
-    <main id="content"><slot /></main>
+    <div class="site-shell">
+      <aside class="catalog-sidebar" aria-label="ツールカテゴリ">
+        <div class="sidebar-inner">
+          <h2 class="sidebar-title">カテゴリから探す</h2>
+          <nav class="category-nav">
+            <a href="/#tools"><span>すべてのツール</span><small>7</small></a>
+            <a href="/?category=seo#tools"><span>SEO・サイト設定</span><small>2</small></a>
+            <a href="/?category=writing#tools"><span>文章</span><small>1</small></a>
+            <a href="/?category=developer#tools"><span>開発・変換</span><small>3</small></a>
+            <a href="/?category=security#tools"><span>セキュリティ</span><small>1</small></a>
+            <a href="/articles/robots-txt/"><span>使い方・解説</span><small>1</small></a>
+          </nav>
+          <p class="sidebar-note">ツールは動作確認後に追加します。現在7種類を公開中です。</p>
+        </div>
+      </aside>
+      <main id="content"><slot /></main>
+    </div>
     <footer>
       <div><a class="logo footer-logo" href="/"><span>WT</span> WebTools</a><p>Web制作の小さな手間を、ブラウザだけで。</p></div>
       <nav aria-label="フッターナビゲーション"><a href="/about/">運営方針</a><a href="/updates/">更新履歴</a><a href="/privacy/">プライバシー</a><a href="/terms/">利用規約</a></nav>
