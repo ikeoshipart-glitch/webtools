@@ -1,0 +1,13 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="JSON整形・検証｜エラー位置も表示｜WebTools" description="JSONを読みやすく整形・圧縮し、構文エラーがある場合は内容を表示します。ブラウザ内で処理します。">
+  <div class="tool-intro"><p class="eyebrow">DEVELOPER TOOL</p><h1>JSON整形・検証</h1><p>貼り付けたJSONを読みやすく整形します。余分な空白を除いた圧縮形式への変換と、構文チェックもできます。</p></div>
+  <div class="tool"><label for="input">JSONを入力</label><textarea id="input" class="code-input" spellcheck="false" placeholder='例：{"name":"WebTools","free":true}'></textarea><div class="actions"><button id="format" type="button">2文字でインデント</button><button id="minify" class="secondary" type="button">1行に圧縮</button></div><label for="result">変換結果</label><textarea id="result" class="code-input" readonly spellcheck="false"></textarea><button id="copy" type="button">結果をコピー</button><p id="message" class="status" aria-live="polite"></p></div>
+  <section class="article"><h2>確認できること</h2><ul><li>カンマや引用符の抜けなど、JSONとして読み込めない箇所</li><li>配列やオブジェクトの入れ子構造</li><li>APIレスポンスや設定ファイルの内容</li></ul><p class="note"><strong>仕様：</strong>JSONにコメント、末尾のカンマ、<code>undefined</code>は使用できません。大きな整数はJavaScriptの数値精度の影響を受けるため、IDなどは文字列として扱ってください。</p></section>
+  <script>
+    const input=document.getElementById('input'),result=document.getElementById('result'),message=document.getElementById('message');
+    function convert(space){try{const parsed=JSON.parse(input.value);result.value=JSON.stringify(parsed,null,space);message.textContent=`JSONとして正常です（${result.value.length.toLocaleString()}文字）。`}catch(error){result.value='';message.textContent=`構文エラー：${error.message}`}}
+    document.getElementById('format').addEventListener('click',()=>convert(2));document.getElementById('minify').addEventListener('click',()=>convert(0));document.getElementById('copy').addEventListener('click',async()=>{if(!result.value)return;await navigator.clipboard.writeText(result.value);message.textContent='コピーしました。'});
+  </script>
+</Layout>

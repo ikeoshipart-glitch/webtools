@@ -1,0 +1,14 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="Base64変換｜日本語対応のエンコード・デコード｜WebTools" description="日本語を含む文字列をBase64へ変換し、Base64から元の文字列へ復元できます。処理はブラウザ内で完結します。">
+  <div class="tool-intro"><p class="eyebrow">DEVELOPER TOOL</p><h1>Base64変換</h1><p>文字列をBase64形式へ変換、または元の文字列へ復元します。日本語や絵文字にも対応しています。</p></div>
+  <div class="tool"><label for="input">変換する文字列</label><textarea id="input" spellcheck="false" placeholder="例：WebToolsで変換"></textarea><div class="actions"><button id="encode" type="button">Base64へ変換</button><button id="decode" class="secondary" type="button">元の文字列へ復元</button></div><label for="result">変換結果</label><textarea id="result" readonly spellcheck="false"></textarea><button id="copy" type="button">結果をコピー</button><p id="message" class="status" aria-live="polite"></p></div>
+  <section class="article"><h2>Base64について</h2><p>画像や文字列などのデータを、英数字中心の文字列として扱うための表現方法です。暗号化ではないため、内容を秘密にする目的には使えません。</p><h2>よく使う場面</h2><ul><li>APIや設定ファイルで短いデータを受け渡す</li><li>メールなど、バイナリを直接扱いにくい仕組みでデータを表現する</li><li>開発中にBase64文字列の中身を確認する</li></ul><p class="note warning"><strong>注意：</strong>パスワードや個人情報を保護する機能ではありません。誰でも簡単に復元できます。</p></section>
+  <script>
+    const input=document.getElementById('input'),result=document.getElementById('result'),message=document.getElementById('message');
+    const encode=text=>btoa(String.fromCharCode(...new TextEncoder().encode(text)));
+    const decode=text=>new TextDecoder('utf-8',{fatal:true}).decode(Uint8Array.from(atob(text.replace(/\s/g,'')),c=>c.charCodeAt(0)));
+    document.getElementById('encode').addEventListener('click',()=>{try{result.value=encode(input.value);message.textContent='Base64へ変換しました。'}catch{message.textContent='入力が長すぎるため変換できませんでした。'}});document.getElementById('decode').addEventListener('click',()=>{try{result.value=decode(input.value);message.textContent='元の文字列へ復元しました。'}catch{result.value='';message.textContent='正しいBase64文字列ではありません。'}});document.getElementById('copy').addEventListener('click',async()=>{if(!result.value)return;await navigator.clipboard.writeText(result.value);message.textContent='コピーしました。'});
+  </script>
+</Layout>
