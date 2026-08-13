@@ -1,0 +1,12 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="metaタグ生成ツール｜WebTools" description="ページタイトル、説明文、URLから基本的なSEO・OGP用metaタグを生成します。">
+  <div class="tool-intro"><p class="eyebrow">SEO TOOL</p><h1>metaタグ生成ツール</h1><p>ページごとのタイトル、説明文、URLから、基本的なSEOタグとOGPタグを作成します。</p><p class="meta">入力内容はブラウザ内だけで処理されます。</p></div>
+  <div class="tool"><div class="field"><label for="title">ページタイトル</label><input id="title" maxlength="80" placeholder="ページ名｜サイト名" /></div><div class="field"><label for="description">ページの説明</label><textarea id="description" maxlength="200" placeholder="このページで分かることを具体的に書きます。"></textarea></div><div class="field"><label for="url">ページURL</label><input id="url" type="url" placeholder="https://example.com/page/" /></div><button id="generate" type="button">タグを生成する</button><div class="field"><label for="result">生成結果</label><textarea id="result" readonly spellcheck="false"></textarea></div><button id="copy" type="button">結果をコピー</button><p id="message" class="status" aria-live="polite"></p></div>
+  <section class="article"><h2>確認するポイント</h2><ul><li>タイトルはページごとに固有の内容にする</li><li>説明文は検索結果だけでなく、読者が内容を判断できる文章にする</li><li>URLは公開後の正規URLを入力する</li></ul></section>
+  <script>
+    const e=(id)=>document.getElementById(id); const esc=(s)=>s.replaceAll('&','&amp;').replaceAll('"','&quot;').replaceAll('<','&lt;').replaceAll('>','&gt;');
+    const generate=()=>{const t=esc(e('title').value.trim()),d=esc(e('description').value.trim()),u=esc(e('url').value.trim());const lines=[];if(t)lines.push(`<title>${t}</title>`,`<meta property="og:title" content="${t}" />`);if(d)lines.push(`<meta name="description" content="${d}" />`,`<meta property="og:description" content="${d}" />`);if(u)lines.push(`<link rel="canonical" href="${u}" />`,`<meta property="og:url" content="${u}" />`);lines.push('<meta property="og:type" content="website" />','<meta name="twitter:card" content="summary" />');e('result').value=lines.join('\n');}; e('generate').addEventListener('click',generate);e('copy').addEventListener('click',async()=>{generate();await navigator.clipboard.writeText(e('result').value);e('message').textContent='コピーしました。';});
+  </script>
+</Layout>

@@ -1,31 +1,29 @@
 ---
 import Layout from '../../layouts/Layout.astro';
 ---
-<Layout title="robots.txt生成ツール｜WebTools" description="サイトURLとクロール設定からrobots.txtを無料で生成できます。">
-  <h1>robots.txt生成ツール</h1><p>検索エンジンのクローラーに、アクセスしてよい場所を伝えるファイルを作成します。</p>
+<Layout title="robots.txt生成ツール｜無料・登録不要｜WebTools" description="許可・拒否パスとサイトマップURLからrobots.txtを生成します。入力内容はブラウザ内だけで処理されます。">
+  <div class="tool-intro"><p class="eyebrow">SEO TOOL</p><h1>robots.txt生成ツール</h1><p>検索エンジンのクローラーに、巡回を許可・制限する場所を伝えるファイルを作ります。設定が分からない場合は「サイト全体を許可」のまま使ってください。</p><p class="meta">最終動作確認：2026年8月13日／Chrome・Edge</p></div>
   <div class="tool">
-    <label for="site">サイトURL</label><input id="site" type="url" placeholder="https://example.com" />
-    <label for="rule">基本設定</label><select id="rule"><option value="allow">サイト全体を許可（推奨）</option><option value="block">サイト全体を拒否</option></select>
-    <label for="exclude">除外するパス（1行に1つ）</label><textarea id="exclude" placeholder="/admin/&#10;/private/"></textarea>
-    <button id="generate" type="button">robots.txtを生成</button>
-    <label for="result">生成結果</label><textarea id="result" readonly></textarea>
-    <div class="actions"><button id="copy" type="button">コピー</button><button id="download" type="button">ダウンロード</button></div>
-    <p id="message" aria-live="polite"></p>
+    <div class="field"><label for="site">サイトURL</label><input id="site" type="url" inputmode="url" placeholder="https://example.com" aria-describedby="site-help" /><small id="site-help">サイトマップ行を追加するために使います。</small></div>
+    <div class="field"><label for="rule">基本設定</label><select id="rule"><option value="allow">サイト全体の巡回を許可（通常はこちら）</option><option value="block">サイト全体の巡回を拒否</option></select></div>
+    <div class="field"><label for="exclude">巡回を制限するパス（1行に1つ）</label><textarea id="exclude" spellcheck="false" placeholder="/admin/&#10;/private/"></textarea></div>
+    <button id="generate" type="button">robots.txtを生成する</button>
+    <div class="field"><label for="result">生成結果</label><textarea id="result" spellcheck="false" readonly></textarea></div>
+    <div class="actions"><button id="copy" type="button">結果をコピー</button><button id="download" class="secondary" type="button">ファイルを保存</button></div><p id="message" class="status" aria-live="polite"></p>
   </div>
-  <p class="note">入力内容はサーバーへ送信されず、このブラウザ内だけで処理されます。</p>
-  <p><a href="/articles/robots-txt/">robots.txtの意味と設置方法を読む →</a></p>
+  <p class="note">入力内容は外部サーバーへ送信せず、このページを開いているブラウザ内だけで処理します。</p>
+  <section class="article"><h2>使い方</h2><ol class="steps"><li>サイトのURLを入力します。</li><li>必要なら、管理画面など巡回させたくないパスを1行ずつ入力します。</li><li>生成結果をコピーするか、robots.txtとして保存します。</li><li>ファイルをサイト直下へ設置し、<code>/robots.txt</code>で開けることを確認します。</li></ol><h2>公開前の確認</h2><ul><li><code>Disallow: /</code>になっていないか</li><li>CSSやJavaScriptなど、表示に必要なファイルを塞いでいないか</li><li>Sitemap URLが実際に開けるか</li></ul><p class="note warning"><strong>注意：</strong>robots.txtはアクセス制限や秘密保持の機能ではありません。非公開ページには認証を設定してください。</p><p><a href="/articles/robots-txt/">robots.txtの書き方と注意点を詳しく読む →</a></p></section>
   <script>
-    const el = (id) => document.getElementById(id);
+    const get = (id) => document.getElementById(id);
     const generate = () => {
-      const site = el('site').value.trim().replace(/\/$/, '');
-      const lines = ['User-agent: *', el('rule').value === 'block' ? 'Disallow: /' : 'Allow: /'];
-      if (el('rule').value === 'allow') el('exclude').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).forEach(x=>lines.push(`Disallow: ${x.startsWith('/')?x:`/${x}`}`));
+      const site = get('site').value.trim().replace(/\/$/, '');
+      const lines = ['User-agent: *', get('rule').value === 'block' ? 'Disallow: /' : 'Allow: /'];
+      if (get('rule').value === 'allow') get('exclude').value.split(/\r?\n/).map(x=>x.trim()).filter(Boolean).forEach(x=>lines.push(`Disallow: ${x.startsWith('/')?x:`/${x}`}`));
       if (site) lines.push('', `Sitemap: ${site}/sitemap-index.xml`);
-      el('result').value = lines.join('\n');
+      get('result').value = lines.join('\n'); get('message').textContent = '生成しました。内容を確認してから設置してください。';
     };
-    el('generate').addEventListener('click', generate);
-    el('copy').addEventListener('click', async()=>{ if(!el('result').value) generate(); await navigator.clipboard.writeText(el('result').value); el('message').textContent='コピーしました。'; });
-    el('download').addEventListener('click',()=>{ if(!el('result').value) generate(); const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([el('result').value],{type:'text/plain'}));a.download='robots.txt';a.click();URL.revokeObjectURL(a.href); });
-    generate();
+    get('generate').addEventListener('click', generate);
+    get('copy').addEventListener('click', async()=>{ if(!get('result').value) generate(); await navigator.clipboard.writeText(get('result').value); get('message').textContent='コピーしました。'; });
+    get('download').addEventListener('click',()=>{ if(!get('result').value) generate(); const a=document.createElement('a');a.href=URL.createObjectURL(new Blob([get('result').value],{type:'text/plain'}));a.download='robots.txt';a.click();URL.revokeObjectURL(a.href); get('message').textContent='robots.txtを保存しました。'; }); generate();
   </script>
 </Layout>
