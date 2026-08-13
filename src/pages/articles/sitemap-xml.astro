@@ -1,0 +1,9 @@
+---
+import Layout from '../../layouts/Layout.astro';
+---
+<Layout title="sitemap.xmlの作り方｜設置場所・robots.txt・送信方法｜WebTools" description="XMLサイトマップ（sitemap.xml）の書き方と作り方を実例で解説。含めるURL、設置場所、robots.txtへの記載、Search Consoleへの送信まで確認できます。"><article class="article"><p class="eyebrow">SEO BASICS</p><h1>sitemap.xmlの作り方</h1><p class="meta">公開・最終確認：2026年8月13日</p><p>XMLサイトマップは、検索エンジンに「検索結果に表示してほしい正式なURL」を伝えるファイルです。特に公開したばかりのサイトや、ページ数が多いサイトでURLを見つけてもらう助けになります。</p><p class="note"><strong>先に結論：</strong>小規模サイトなら、公開したいURLを<code>&lt;loc&gt;</code>へ並べた基本形で十分です。CMSやAstroが自動生成している場合は、その機能を優先します。</p><h2>最小構成の書き方</h2><pre><code>&lt;?xml version="1.0" encoding="UTF-8"?&gt;
+&lt;urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"&gt;
+  &lt;url&gt;
+    &lt;loc&gt;https://example.com/&lt;/loc&gt;
+  &lt;/url&gt;
+&lt;/urlset&gt;</code></pre><h2>含めるURL</h2><ul><li>検索結果に表示したい公開ページ</li><li>重複がある場合は正規URLだけ</li><li><code>https://</code>とドメインを含む完全なURL</li><li>実際に正常表示できるURL</li></ul><h2>含めない方がよいURL</h2><ul><li><code>noindex</code>ページ</li><li>404ページ、リダイレクト元</li><li>認証が必要なページ</li><li>絞り込みなどで生まれた重複URL</li></ul><h2>lastmodを使う場合</h2><p>ページを最後に大きく更新した日を記載します。サイトマップを生成した日ではありません。正確に管理できなければ省略して構いません。</p><h2>priorityとchangefreq</h2><p>仕様上は記載できますが、Googleは現在この2つを無視すると説明しています。本ツールでは意味の薄い設定を増やさないため出力しません。</p><h2>設置場所と上限</h2><p>通常はサイトのルートへ置き、<code>https://example.com/sitemap.xml</code>で開けるようにします。UTF-8、1ファイル50MB以下、50,000URL以下が上限です。</p><h2>robots.txtへ記載する</h2><pre><code>Sitemap: https://example.com/sitemap.xml</code></pre><h2>Search Consoleへ送信する</h2><ol><li>対象プロパティを開く</li><li>「サイトマップ」を選ぶ</li><li>実際のファイル名を入力して送信する</li><li>ステータスと検出ページ数を確認する</li></ol><p>送信はファイルの場所を知らせる操作で、クロールや登録を保証するものではありません。</p><h2>よくある質問</h2><h3>必ず必要ですか？</h3><p>必須ではありません。内部リンクから全ページを見つけられる小規模サイトでは、なくてもクロールされる場合があります。</p><h3>送信すると順位が上がりますか？</h3><p>送信だけで順位が上がるものではなく、URL発見のための補助手段です。</p><h2>URL一覧から作成する</h2><p><a href="/tools/sitemap-generator/">無料のXMLサイトマップ生成ツールを使う →</a></p></article></Layout>
