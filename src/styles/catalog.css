@@ -2,7 +2,7 @@
 .site-shell{display:grid;grid-template-columns:260px minmax(0,1fr);gap:2rem;width:min(1320px,calc(100% - 2rem));margin:0 auto}
 .site-shell main{width:100%;min-width:0;margin:0}
 .catalog-sidebar{padding:2.3rem 0 4rem}
-.sidebar-inner{position:sticky;top:1rem;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.sidebar-inner{position:static;background:#fff;border:1px solid var(--line);border-radius:8px;overflow:hidden}
 .sidebar-title{display:block;margin:0;padding:1rem 1.1rem;background:var(--accent);color:#fff;font-size:1rem;font-weight:700;list-style:none;cursor:default}.sidebar-title::-webkit-details-marker{display:none}
 .sidebar-menu{display:block}.sidebar-section{padding:.65rem 0;border-bottom:1px solid #e8ece9}.sidebar-label{margin:0;padding:.25rem 1rem;color:#68736f;font-size:.75rem;font-weight:800;letter-spacing:.08em}.sidebar-category,.sidebar-overview{display:flex;align-items:center;justify-content:space-between;gap:.5rem;padding:.5rem 1rem;color:#26312e;text-decoration:none;font-size:.9rem}.sidebar-category:hover,.sidebar-overview:hover,.sidebar-section li a:hover{background:var(--soft);color:var(--accent-dark)}.sidebar-menu small{color:#77817e;font-size:.75rem}.sidebar-section ul{margin:.15rem 0 0;padding:0;list-style:none}.sidebar-section li a{display:block;padding:.38rem 1rem .38rem 1.55rem;color:#4b5652;text-decoration:none;font-size:.84rem;line-height:1.45}.sidebar-menu a.active{background:var(--soft);box-shadow:inset 4px 0 0 var(--accent);color:var(--accent-dark);font-weight:700}.sidebar-guides,.sidebar-support{background:#fbfcfa}
 .sidebar-note{margin:0;padding:1rem;color:var(--muted);font-size:.82rem;background:#fafbf9}
