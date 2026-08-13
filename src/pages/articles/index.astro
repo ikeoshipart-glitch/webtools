@@ -1,0 +1,5 @@
+---
+import Layout from '../../layouts/Layout.astro';
+const articles=[{href:'/articles/sitemap-xml/',title:'sitemap.xmlの作り方',text:'含めるURL、設置場所、robots.txtへの記載、Search Consoleへの送信まで解説。'},{href:'/articles/robots-txt/',title:'robots.txtの書き方',text:'全許可、特定パスの拒否、Sitemapの記載例と確認方法。'}];
+---
+<Layout title="Web制作の読みもの｜設定・使い方を実例で解説｜WebTools" description="robots.txtやsitemap.xmlなど、Web制作とSEOの設定方法を実例で解説します。ツールを使う前後の確認手順や注意点も掲載しています。"><section class="catalog-hero"><div><p class="eyebrow">GUIDES & NOTES</p><h1>Web制作の読みもの</h1><p>設定の意味や公開後の確認方法を、実際に使える例と一緒にまとめます。</p></div><div class="catalog-count"><strong>2</strong><span>公開中の記事</span></div></section><section><div class="catalog-section-head"><div><p class="eyebrow">LATEST ARTICLES</p><h2>新着記事</h2></div><p>内容を確認してから公開</p></div><div class="grid">{articles.map(a=><a class="card" href={a.href}><span class="tag">SEOの基本</span><h3>{a.title}</h3><p>{a.text}</p><small>記事を読む →</small></a>)}</div></section></Layout>
