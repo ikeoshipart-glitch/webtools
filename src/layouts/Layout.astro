@@ -5,6 +5,7 @@ import '../styles/catalog.css';
 interface Props { title: string; description: string; }
 const { title, description } = Astro.props;
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const pathname = Astro.url.pathname;
 const jsonLd = {
   '@context': 'https://schema.org',
   '@type': 'WebSite',
@@ -46,12 +47,12 @@ const jsonLd = {
         <div class="sidebar-inner">
           <h2 class="sidebar-title">カテゴリから探す</h2>
           <nav class="category-nav">
-            <a href="/#tools"><span>すべてのツール</span><small>7</small></a>
-            <a href="/?category=seo#tools"><span>SEO・サイト設定</span><small>2</small></a>
-            <a href="/?category=writing#tools"><span>文章</span><small>1</small></a>
-            <a href="/?category=developer#tools"><span>開発・変換</span><small>3</small></a>
-            <a href="/?category=security#tools"><span>セキュリティ</span><small>1</small></a>
-            <a href="/articles/robots-txt/"><span>使い方・解説</span><small>1</small></a>
+            <a class={pathname === '/' ? 'active' : undefined} href="/#tools"><span>すべてのツール</span><small>7</small></a>
+            <a class={pathname.startsWith('/seo') ? 'active' : undefined} href="/seo/"><span>SEO・サイト設定</span><small>2</small></a>
+            <a class={pathname.startsWith('/writing') ? 'active' : undefined} href="/writing/"><span>文章</span><small>1</small></a>
+            <a class={pathname.startsWith('/developer') ? 'active' : undefined} href="/developer/"><span>開発・変換</span><small>3</small></a>
+            <a class={pathname.startsWith('/security') ? 'active' : undefined} href="/security/"><span>セキュリティ</span><small>1</small></a>
+            <a class={pathname.startsWith('/articles/') ? 'active' : undefined} href="/articles/robots-txt/"><span>使い方・解説</span><small>1</small></a>
           </nav>
           <p class="sidebar-note">ツールは動作確認後に追加します。現在7種類を公開中です。</p>
         </div>
