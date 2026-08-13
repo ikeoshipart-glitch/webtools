@@ -1,0 +1,5 @@
+---
+import Layout from '../layouts/Layout.astro';
+const tools=[{href:'/tools/character-counter/',tag:'文章',name:'文字数カウント',text:'文字数、空白を除いた文字数、行数をその場で確認。'}];
+---
+<Layout title="文章ツール一覧｜WebTools" description="文字数や行数をブラウザ内で確認できる無料の文章ツール一覧です。"><section class="catalog-hero"><div><p class="eyebrow">WRITING</p><h1>文章</h1><p>原稿や説明文を整えるときに繰り返し使う作業を、すばやく終わらせます。</p></div><div class="catalog-count"><strong>1</strong><span>このカテゴリのツール</span></div></section><section><div class="catalog-section-head"><div><p class="eyebrow">CATEGORY</p><h2>文章のツール</h2></div><p>登録・インストール不要</p></div><div class="grid">{tools.map(tool=><a class="card tool-card" href={tool.href}><span class="tag">{tool.tag}</span><h3>{tool.name}</h3><p>{tool.text}</p><small>このツールを使う →</small></a>)}</div></section></Layout>
