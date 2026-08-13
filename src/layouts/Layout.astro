@@ -43,19 +43,42 @@ const jsonLd = {
       </nav>
     </header>
     <div class="site-shell">
-      <aside class="catalog-sidebar" aria-label="ツールカテゴリ">
-        <div class="sidebar-inner">
-          <h2 class="sidebar-title">カテゴリから探す</h2>
-          <nav class="category-nav">
-            <a class={pathname === '/' ? 'active' : undefined} href="/#tools"><span>すべてのツール</span><small>8</small></a>
-            <a class={pathname.startsWith('/seo') ? 'active' : undefined} href="/seo/"><span>SEO・サイト設定</span><small>3</small></a>
-            <a class={pathname.startsWith('/writing') ? 'active' : undefined} href="/writing/"><span>文章</span><small>1</small></a>
-            <a class={pathname.startsWith('/developer') ? 'active' : undefined} href="/developer/"><span>開発・変換</span><small>3</small></a>
-            <a class={pathname.startsWith('/security') ? 'active' : undefined} href="/security/"><span>セキュリティ</span><small>1</small></a>
-            <a class={pathname.startsWith('/articles') ? 'active' : undefined} href="/articles/"><span>使い方・解説</span><small>2</small></a>
+      <aside class="catalog-sidebar" aria-label="サイト内メニュー">
+        <details class="sidebar-inner" open>
+          <summary class="sidebar-title">サイトメニュー</summary>
+          <nav class="sidebar-menu" aria-label="サイト内ナビゲーション">
+            <section class="sidebar-section">
+              <p class="sidebar-label">ツールを探す</p>
+              <a class:list={['sidebar-overview', {active: pathname === '/'}]} href="/#tools"><span>すべてのツール</span><small>8</small></a>
+            </section>
+            <section class="sidebar-section">
+              <a class:list={['sidebar-category', {active: pathname === '/seo/'}]} href="/seo/"><strong>SEO・サイト設定</strong><small>3</small></a>
+              <ul><li><a class:active={pathname === '/tools/sitemap-generator/'} href="/tools/sitemap-generator/">XMLサイトマップ生成</a></li><li><a class:active={pathname === '/tools/robots-txt-generator/'} href="/tools/robots-txt-generator/">robots.txt生成</a></li><li><a class:active={pathname === '/tools/meta-tag-generator/'} href="/tools/meta-tag-generator/">metaタグ生成</a></li></ul>
+            </section>
+            <section class="sidebar-section">
+              <a class:list={['sidebar-category', {active: pathname === '/writing/'}]} href="/writing/"><strong>文章</strong><small>1</small></a>
+              <ul><li><a class:active={pathname === '/tools/character-counter/'} href="/tools/character-counter/">文字数カウント</a></li></ul>
+            </section>
+            <section class="sidebar-section">
+              <a class:list={['sidebar-category', {active: pathname === '/developer/'}]} href="/developer/"><strong>開発・変換</strong><small>3</small></a>
+              <ul><li><a class:active={pathname === '/tools/json-formatter/'} href="/tools/json-formatter/">JSON整形・検証</a></li><li><a class:active={pathname === '/tools/url-encoder/'} href="/tools/url-encoder/">URLエンコード</a></li><li><a class:active={pathname === '/tools/base64-converter/'} href="/tools/base64-converter/">Base64変換</a></li></ul>
+            </section>
+            <section class="sidebar-section">
+              <a class:list={['sidebar-category', {active: pathname === '/security/'}]} href="/security/"><strong>セキュリティ</strong><small>1</small></a>
+              <ul><li><a class:active={pathname === '/tools/password-generator/'} href="/tools/password-generator/">パスワード生成</a></li></ul>
+            </section>
+            <section class="sidebar-section sidebar-guides">
+              <p class="sidebar-label">読みもの</p>
+              <a class:list={['sidebar-overview', {active: pathname === '/articles/'}]} href="/articles/"><span>記事一覧</span><small>2</small></a>
+              <ul><li><a class:active={pathname === '/articles/sitemap-xml/'} href="/articles/sitemap-xml/">sitemap.xmlの作り方</a></li><li><a class:active={pathname === '/articles/robots-txt/'} href="/articles/robots-txt/">robots.txtの書き方</a></li></ul>
+            </section>
+            <section class="sidebar-section sidebar-support">
+              <p class="sidebar-label">サイト情報</p>
+              <ul><li><a class:active={pathname === '/about/'} href="/about/">このサイトについて</a></li><li><a class:active={pathname === '/updates/'} href="/updates/">更新履歴</a></li></ul>
+            </section>
           </nav>
-          <p class="sidebar-note">ツールは動作確認後に追加します。現在8種類を公開中です。</p>
-        </div>
+          <p class="sidebar-note">現在8種類のツールと2本の記事を公開中です。</p>
+        </details>
       </aside>
       <main id="content"><slot /></main>
     </div>
