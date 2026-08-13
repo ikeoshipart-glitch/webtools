@@ -1,9 +1,59 @@
 ---
 import Layout from '../../layouts/Layout.astro';
+const faq = {
+  '@context': 'https://schema.org',
+  '@type': 'FAQPage',
+  mainEntity: [
+    { '@type': 'Question', name: 'robots.txtがない場合はどうなりますか？', acceptedAnswer: { '@type': 'Answer', text: 'robots.txtで特に指定しない場合、クローラーはサイト全体を巡回できるものとして扱います。制限が不要なら必須ではありません。' } },
+    { '@type': 'Question', name: 'robots.txtで検索結果への表示を禁止できますか？', acceptedAnswer: { '@type': 'Answer', text: 'できません。robots.txtはクロールを制御するファイルです。検索結果への表示を防ぐ目的にはnoindexや認証を使います。' } },
+    { '@type': 'Question', name: 'robots.txtはどこに設置しますか？', acceptedAnswer: { '@type': 'Answer', text: 'https://example.com/robots.txt のように、対象となるドメインまたはサブドメインの直下へ設置します。' } }
+  ]
+};
 ---
-<Layout title="robots.txtとは？書き方・設置場所・注意点を実例で解説｜WebTools" description="robots.txtでできること、基本構文、設置場所、よくある失敗を、実際の記述例とともに解説します。">
-  <article class="article"><p class="eyebrow">SEO BASICS</p><h1>robots.txtとは？</h1><p class="meta">公開：2026年8月6日　最終確認：2026年8月13日</p><p>robots.txtは、検索エンジンなどのクローラーに「サイト内のどこを巡回してよいか」を伝える公開テキストファイルです。サイトのトップ階層に置きます。</p><p class="note"><strong>先に結論：</strong>一般的な小規模サイトでは、全体を許可し、サイトマップURLを記載するシンプルな設定から始めれば十分です。</p><h2>基本形</h2><pre><code>User-agent: *
+<Layout title="robots.txtの書き方｜全許可・Disallow・Sitemapの例｜WebTools" description="robots.txtの書き方を、全許可、特定パスの拒否、Sitemap記載の実例で解説。設置場所、確認方法、よくある間違いも分かります。">
+  <script type="application/ld+json" set:html={JSON.stringify(faq)} />
+  <article class="article">
+    <p class="eyebrow">SEO BASICS</p>
+    <h1>robots.txtの書き方</h1>
+    <p class="meta">公開：2026年8月6日　最終確認：2026年8月13日</p>
+    <p>robots.txtは、検索エンジンなどのクローラーに「サイト内のどこを巡回してよいか」を伝える公開テキストファイルです。このページでは、目的別にそのまま確認できる記述例をまとめます。</p>
+    <p class="note"><strong>先に結論：</strong>一般的な小規模サイトでは、サイト全体を許可し、SitemapのURLを記載するシンプルな設定から始めれば十分です。</p>
+
+    <h2>サイト全体を許可する書き方</h2>
+    <pre><code>User-agent: *
 Allow: /
 
-Sitemap: https://example.com/sitemap-index.xml</code></pre><table><thead><tr><th>記述</th><th>意味</th></tr></thead><tbody><tr><td><code>User-agent: *</code></td><td>すべてのクローラーを対象にする</td></tr><tr><td><code>Allow: /</code></td><td>サイト全体の巡回を許可する</td></tr><tr><td><code>Disallow: /admin/</code></td><td>/admin/以下の巡回を制限する</td></tr><tr><td><code>Sitemap:</code></td><td>サイトマップの場所を伝える</td></tr></tbody></table><h2>設置場所</h2><p>ドメイン直下に置き、<code>https://example.com/robots.txt</code>で開ける状態にします。サブフォルダに置いたファイルは、そのドメイン全体のrobots.txtとして扱われません。</p><h2>robots.txtでできないこと</h2><ul><li>ページをパスワードで保護する</li><li>URLが検索結果へ絶対に出ないよう保証する</li><li>悪意のあるアクセスを遮断する</li></ul><p>管理画面や個人情報の保護には、ログイン認証やサーバー側のアクセス制限を使います。</p><h2>公開前チェック</h2><ol><li><code>Disallow: /</code>で全体を塞いでいないか</li><li>記載したサイトマップURLが開けるか</li><li>本番公開後にrobots.txtのURLへ直接アクセスできるか</li></ol><h2>このサイトでの実例</h2><p>WebToolsではサイト全体を許可し、Astroが生成したサイトマップを指定しています。公開URLでファイルを直接確認し、Search Consoleにもサイトマップを送信しています。</p><p><a href="/tools/robots-txt-generator/">robots.txt生成ツールを使う →</a></p></article>
+Sitemap: https://example.com/sitemap-index.xml</code></pre>
+    <p><code>User-agent: *</code>はすべてのクローラーを対象にし、<code>Allow: /</code>はサイト全体の巡回を許可します。Googleの仕様では、ルールを記載しない場合も暗黙的にクロールは許可されます。</p>
+
+    <h2>特定のディレクトリを拒否する書き方</h2>
+    <pre><code>User-agent: *
+Allow: /
+Disallow: /admin/
+Disallow: /private/
+
+Sitemap: https://example.com/sitemap-index.xml</code></pre>
+    <p>対象がディレクトリなら、先頭と末尾を<code>/</code>で囲みます。ただし、robots.txtは秘密を守る機能ではありません。管理画面や個人情報を含むページにはログイン認証やサーバー側の制限が必要です。</p>
+
+    <h2>Sitemapを記載する書き方</h2>
+    <p><code>Sitemap:</code>には、プロトコルとドメインを含む完全なURLを記載します。ファイル名はサイトによって<code>sitemap.xml</code>または<code>sitemap-index.xml</code>など異なるため、実際にブラウザで開けるURLを使ってください。</p>
+
+    <h2>主な記述と意味</h2>
+    <table><thead><tr><th>記述</th><th>意味</th></tr></thead><tbody><tr><td><code>User-agent: *</code></td><td>すべてのクローラーを対象にする</td></tr><tr><td><code>Allow: /</code></td><td>サイト全体の巡回を許可する</td></tr><tr><td><code>Disallow: /admin/</code></td><td>/admin/以下の巡回を制限する</td></tr><tr><td><code>Sitemap:</code></td><td>サイトマップの場所を伝える</td></tr></tbody></table>
+
+    <h2>設置場所と確認方法</h2>
+    <ol><li>ファイル名を小文字の<code>robots.txt</code>にする</li><li>ドメイン直下へ設置する</li><li><code>https://example.com/robots.txt</code>へ直接アクセスする</li><li>内容がHTMLページではなく、作成したテキストとして表示されることを確認する</li><li>記載したSitemap URLも開けることを確認する</li></ol>
+
+    <h2>公開前に確認したい間違い</h2>
+    <ul><li><code>Disallow: /</code>でサイト全体を塞いでいないか</li><li>CSSやJavaScriptなど、表示に必要なファイルを塞いでいないか</li><li>Sitemapを相対URLで書いていないか</li><li>robots.txtをnoindexの代わりに使っていないか</li></ul>
+
+    <h2>よくある質問</h2>
+    <h3>robots.txtがない場合はどうなりますか？</h3><p>特に指定がなければ、クローラーはサイト全体を巡回できるものとして扱います。巡回制限やSitemapの案内が不要なら必須ではありません。</p>
+    <h3>検索結果への表示を禁止できますか？</h3><p>できません。robots.txtはクロールを制御するものです。検索結果への表示を防ぐ目的には<code>noindex</code>や認証を使います。</p>
+    <h3>どこに設置しますか？</h3><p><code>https://example.com/robots.txt</code>のように対象ドメイン直下へ設置します。サブフォルダに置いたファイルは、ドメイン全体のrobots.txtとして扱われません。</p>
+
+    <h2>入力して作成する</h2>
+    <p>URLと除外したいパスから作る場合は、下の生成ツールを使えます。入力内容はサーバーへ送信せず、ブラウザ内で処理します。</p>
+    <p><a href="/tools/robots-txt-generator/">無料のrobots.txt生成ツールを使う →</a></p>
+  </article>
 </Layout>
