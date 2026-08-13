@@ -1,0 +1,5 @@
+---
+import Layout from '../layouts/Layout.astro';
+const tools=[{href:'/tools/password-generator/',tag:'安全',name:'パスワード生成',text:'安全な乱数を使い、文字数と文字種を指定して生成。'}];
+---
+<Layout title="セキュリティツール一覧｜WebTools" description="ブラウザ内で安全な乱数を使ってパスワードを生成できる無料セキュリティツールです。"><section class="catalog-hero"><div><p class="eyebrow">SECURITY</p><h1>セキュリティ</h1><p>アカウントを守るために必要な、安全な文字列をブラウザ内で作成します。</p></div><div class="catalog-count"><strong>1</strong><span>このカテゴリのツール</span></div></section><section><div class="catalog-section-head"><div><p class="eyebrow">CATEGORY</p><h2>セキュリティのツール</h2></div><p>登録・インストール不要</p></div><div class="grid">{tools.map(tool=><a class="card tool-card" href={tool.href}><span class="tag">{tool.tag}</span><h3>{tool.name}</h3><p>{tool.text}</p><small>このツールを使う →</small></a>)}</div></section></Layout>

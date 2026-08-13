@@ -1,0 +1,5 @@
+---
+import Layout from '../layouts/Layout.astro';
+const tools=[{href:'/tools/url-encoder/',tag:'開発',name:'URLエンコード',text:'日本語や記号をURLで扱える形式へ変換・復元。'},{href:'/tools/base64-converter/',tag:'開発',name:'Base64変換',text:'日本語を含む文字列をBase64へ変換・復元。'},{href:'/tools/json-formatter/',tag:'開発',name:'JSON整形・検証',text:'JSONを読みやすく整形し、構文エラーを確認。'}];
+---
+<Layout title="開発・変換ツール一覧｜WebTools" description="URL、Base64、JSONなどをブラウザ内で変換・検証できる無料開発ツール一覧です。"><section class="catalog-hero"><div><p class="eyebrow">DEVELOPER</p><h1>開発・変換</h1><p>データ変換やAPI確認など、Web開発中の小さな詰まりを解消します。</p></div><div class="catalog-count"><strong>3</strong><span>このカテゴリのツール</span></div></section><section><div class="catalog-section-head"><div><p class="eyebrow">CATEGORY</p><h2>開発・変換のツール</h2></div><p>登録・インストール不要</p></div><div class="grid">{tools.map(tool=><a class="card tool-card" href={tool.href}><span class="tag">{tool.tag}</span><h3>{tool.name}</h3><p>{tool.text}</p><small>このツールを使う →</small></a>)}</div></section></Layout>
