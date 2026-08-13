@@ -1,6 +1,7 @@
 ---
 import Layout from '../layouts/Layout.astro';
 const tools = [
+  { href:'/tools/sitemap-generator/', category:'seo', tag:'SEO', name:'XMLサイトマップ生成', text:'URL一覧からsitemap.xmlを作成し、重複や別ドメインを確認。' },
   { href:'/tools/robots-txt-generator/', category:'seo', tag:'SEO', name:'robots.txt生成', text:'許可・拒否パスとサイトマップURLから設定ファイルを作成。' },
   { href:'/tools/meta-tag-generator/', category:'seo', tag:'SEO', name:'metaタグ生成', text:'タイトルと説明文から基本的なheadタグを作成。' },
   { href:'/tools/character-counter/', category:'writing', tag:'文章', name:'文字数カウント', text:'文字数、空白を除いた文字数、行数をその場で確認。' },
@@ -13,9 +14,9 @@ const tools = [
 <Layout title="WebTools｜Web制作で使う、無料の小さな道具箱" description="robots.txt、metaタグ、文字数、JSON整形など、Web制作の定型作業をブラウザ内で処理できる無料ツール集です。">
   <section class="catalog-hero">
     <div><p class="eyebrow">WEB制作の道具売り場</p><h1>必要なツールを、すぐ見つける。</h1><p>設定ファイルの作成や文字の変換など、繰り返す作業をブラウザだけで片づけます。</p></div>
-    <div class="catalog-count"><strong>7</strong><span>公開中の無料ツール</span></div>
+    <div class="catalog-count"><strong>8</strong><span>公開中の無料ツール</span></div>
   </section>
-  <section class="tool-search" aria-label="ツール検索"><div class="search-row"><label for="tool-query">ツール名・用途から検索</label><span id="result-count" class="result-count">7件を表示</span></div><input id="tool-query" type="search" placeholder="例：JSON、文字数、SEO" autocomplete="off" /><div class="filter-chips" aria-label="カテゴリで絞り込み"><button class="filter-chip active" type="button" data-filter="all">すべて</button><button class="filter-chip" type="button" data-filter="seo">SEO</button><button class="filter-chip" type="button" data-filter="writing">文章</button><button class="filter-chip" type="button" data-filter="developer">開発</button><button class="filter-chip" type="button" data-filter="security">安全</button></div></section>
+  <section class="tool-search" aria-label="ツール検索"><div class="search-row"><label for="tool-query">ツール名・用途から検索</label><span id="result-count" class="result-count">8件を表示</span></div><input id="tool-query" type="search" placeholder="例：JSON、文字数、SEO" autocomplete="off" /><div class="filter-chips" aria-label="カテゴリで絞り込み"><button class="filter-chip active" type="button" data-filter="all">すべて</button><button class="filter-chip" type="button" data-filter="seo">SEO</button><button class="filter-chip" type="button" data-filter="writing">文章</button><button class="filter-chip" type="button" data-filter="developer">開発</button><button class="filter-chip" type="button" data-filter="security">安全</button></div></section>
   <section id="tools"><div class="catalog-section-head"><div><p class="eyebrow">TOOL CATALOG</p><h2>ツール一覧</h2></div><p>登録・インストール不要</p></div><div class="grid" id="tool-grid">{tools.map(tool=><a class="card tool-card" data-category={tool.category} data-search={`${tool.name} ${tool.tag} ${tool.text}`} href={tool.href}><span class="tag">{tool.tag}</span><h3>{tool.name}</h3><p>{tool.text}</p><small>このツールを使う →</small></a>)}</div><p id="empty-result" class="empty-result">該当するツールがありません。別の言葉で検索してください。</p></section>
   <section><div class="section-head"><h2>まず読んでおきたい記事</h2><p>ツールを置くだけでなく、「なぜその設定になるのか」を実例とともに残します。</p></div><div class="grid"><a class="card" href="/articles/robots-txt/"><span class="tag">2026年8月更新</span><h3>robots.txtの書き方</h3><p>全許可、特定パスの拒否、Sitemapの記載例と公開前の確認方法をまとめました。</p><small>記事を読む →</small></a><a class="card" href="/updates/"><span class="tag">運営情報</span><h3>更新履歴</h3><p>追加した機能や修正内容を日付とともに公開しています。</p><small>履歴を見る →</small></a></div></section>
   <div class="trust-strip"><div><strong>処理場所</strong><span>入力内容は原則ブラウザ内だけで処理</span></div><div><strong>料金</strong><span>すべて無料。会員登録なし</span></div><div><strong>運営方針</strong><span>実際に動作確認したものだけ公開</span></div></div>
